@@ -22,23 +22,25 @@ app.post('/clear', (req, res) => {
 });
 
 app.post("/update", (req, res) => {
-  let tmp
-  if (req.body.temp == 1) {
-    tmp = Date.now()
+  if (req.body.imgsid != "") {
+    client.setActivity({
+      details: req.body.li1,
+      state: req.body.li2,
+      largeImageKey: req.body.img,
+      largeImageText: req.body.imgtxt,
+      smallImageKey: req.body.imgsid,
+      smallImageText: req.body.imgstxt,
+      startTimestamp: Date.now()
+    }).catch(console.error);
   } else {
-    tmp = req.body.temp
+    client.setActivity({
+      details: req.body.li1,
+      state: req.body.li2,
+      largeImageKey: req.body.img,
+      largeImageText: req.body.imgtxt,
+      startTimestamp: Date.now()
+    }).catch(console.error);
   }
-
-
-  client.setActivity({
-    details: req.body.li1,
-    state: req.body.li2,
-    largeImageKey: req.body.img,
-    largeImageText: req.body.imgtxt,
-    smallImageKey: req.body.imgsid,
-    smallImageText: req.body.imgstxt,
-    startTimestamp: tmp
-  }).catch(console.error);
   res.sendStatus(200)
 })
 
