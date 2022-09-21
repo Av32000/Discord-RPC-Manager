@@ -1,0 +1,27 @@
+*{
+  background-color: #36393f;
+  color: #5865f2;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input{
+  border-radius: 20px;
+  border-color: darkgray;
+  border-style: solid;
+  padding: 5px;
+  text-align: center;
+}
+
+input:focus{
+  outline: none;
+}
+
+button{
+  border-radius: 25px;
+  border-style: solid;
+  border-color: #5865f2;
+  background-color: #5865f2;
+  color: #36393f;
+  cursor: pointer;
+  padding: 7px;
+}
