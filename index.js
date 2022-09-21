@@ -49,5 +49,5 @@ app.post("/update", (req, res) => {
 })
 
 app.listen(8080, function () {
-  console.log('Custom RPC Manager listening at port 8080');
+  console.log('Custom RPC Manager listening at port 8080 (http://localhost:8080)');
 });
