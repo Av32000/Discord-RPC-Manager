@@ -21,6 +21,10 @@ app.post('/clear', (req, res) => {
   client.clearActivity();
 });
 
+app.get("/favicon.ico", (req, res) => {
+  res.sendFile(path.join(__dirname, '/favicon.ico'))
+})
+
 app.post("/update", (req, res) => {
   if (req.body.imgsid != "") {
     client.setActivity({
