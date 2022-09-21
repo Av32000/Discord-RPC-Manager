@@ -17,6 +17,10 @@ app.get('/style/index.css', (req, res) => {
   res.sendFile(path.join(__dirname, '/style/index.css'))
 });
 
+app.post('/clear', (req, res) => {
+  client.clearActivity();
+});
+
 app.post("/update", (req, res) => {
   let tmp
   if (req.body.temp == 1) {
