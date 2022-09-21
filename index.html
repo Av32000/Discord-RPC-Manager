@@ -13,8 +13,18 @@
       let l2 = document.getElementById("l2").value
       let imgid = document.getElementById("imgid").value
       let tmp = document.getElementById("tmp").value
+      let imgtxt = document.getElementById("imgtxt").value
+      let imgsid = document.getElementById("imgsid").value
+      let imgstxt = document.getElementById("imgstxt").value
 
-      console.log(l1 + " / " + l2 + " / " + imgid + " / " + tmp)
+      //Send Data
+      fetch("/update", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ li1: l1, li2: l2, img: imgid, temp: tmp, imgtxt: imgtxt, imgsid: imgsid, imgstxt: imgstxt }),
+      });
     }
   </script>
 </head>
@@ -24,8 +34,14 @@
   <input type="text" id="l1" placeholder="Ligne 1">
   <p>Ligne 2 :</p>
   <input type="text" id="l2" placeholder="Ligne 2">
-  <p>Image :</p>
+  <p>Large Image ID :</p>
   <input type="text" id="imgid" placeholder="Image id">
+  <p>Large Image Text :</p>
+  <input type="text" id="imgtxt" placeholder="Image Text">
+  <p>Small Image ID</p>
+  <input type="text" id="imgsid" placeholder="Image id">
+  <p>Small Image Text :</p>
+  <input type="text" id="imgstxt" placeholder="Image Text">
   <p>Timestamp :</p>
   <input type="number" id="tmp" placeholder="Timestamp">
   <button onclick="postData()">Actualiser</button>
