@@ -5,6 +5,8 @@ const rpc = require('discord-rpc');
 const client = new rpc.Client({ transport: 'ipc' });
 client.login({ clientId: "945966822136639599" }).catch(console.error);
 
+let tmp = Date.now()
+
 const app = express();
 app.use(express.json())
 
@@ -42,7 +44,7 @@ app.post("/update", (req, res) => {
       state: req.body.li2,
       largeImageKey: req.body.img,
       largeImageText: req.body.imgtxt,
-      startTimestamp: Date.now()
+      startTimestamp: tmp
     }).catch(console.error);
   }
   res.sendStatus(200)
