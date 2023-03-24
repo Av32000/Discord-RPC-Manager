@@ -3,9 +3,10 @@ const path = require('path');
 const rpc = require('discord-rpc');
 
 const client = new rpc.Client({ transport: 'ipc' });
-client.login({ clientId: "945966822136639599" }).catch(console.error);
+const clientID = "945966822136639599"
+client.login({ clientId: clientID }).catch(console.error);
 
-let tmp = Date.now()
+const tmp = Date.now()
 
 const app = express();
 app.use(express.json())
@@ -13,6 +14,10 @@ app.use(express.json())
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'))
   client.clearActivity();
+});
+
+app.get('/id', (req, res) => {
+  res.send(clientID)
 });
 
 app.get('/style/index.css', (req, res) => {

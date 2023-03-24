@@ -1,16 +1,16 @@
-*{
+* {
   background-color: #36393f;
   color: #5865f2;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   align-items: center;
 }
 
-body{
+body {
   display: flex;
   flex-direction: column;
 }
 
-input{
+input {
   border-radius: 20px;
   border-color: darkgray;
   border-style: solid;
@@ -18,20 +18,20 @@ input{
   text-align: center;
 }
 
-.inputs{
+.inputs {
   float: inline-start;
   padding-bottom: 10px;
 }
 
-p{
+p {
   text-align: center;
 }
 
-input:focus{
+input:focus {
   outline: none;
 }
 
-button{
+button {
   border-radius: 25px;
   border-style: solid;
   cursor: pointer;
@@ -40,14 +40,21 @@ button{
   width: 160px;
 }
 
-.update{
+.update {
   border-color: #5865f2;
   background-color: #5865f2;
   color: #36393f;
 }
 
-.clear{
+.clear {
   border-color: #ED4245;
   background-color: #ED4245;
   color: white;
+}
+
+.infos {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: .7rem;
 }
