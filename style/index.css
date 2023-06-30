@@ -58,3 +58,22 @@ button {
   right: 10px;
   font-size: .7rem;
 }
+
+.presets {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  top: 10px;
+  left: 10px;
+  border-radius: 25px;
+  padding: 0px 10px;
+  border: 1px solid #5865f2;
+  font-size: .7rem;
+}
+
+.presets select {
+  width: 140px;
+  height: 40px;
+  border: 0px;
+  outline: none;
+}

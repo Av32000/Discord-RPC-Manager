@@ -1,15 +1,24 @@
 const express = require('express');
 const path = require('path');
 const rpc = require('discord-rpc');
+const dotenv = require("dotenv")
+
+dotenv.config()
+
+const { readFileSync, writeFileSync, existsSync } = require('fs');
 
 const client = new rpc.Client({ transport: 'ipc' });
-const clientID = "945966822136639599"
+const clientID = process.env.CLIENT_ID
 client.login({ clientId: clientID }).catch(console.error);
 
 const tmp = Date.now()
 
 const app = express();
 app.use(express.json())
+
+if (!existsSync("presets.json")) {
+  writeFileSync("presets.json", "[]")
+}
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'))
@@ -26,10 +35,22 @@ app.get('/style/index.css', (req, res) => {
 
 app.post('/clear', (req, res) => {
   client.clearActivity();
+  res.sendStatus(200)
 });
 
 app.get("/favicon.ico", (req, res) => {
   res.sendFile(path.join(__dirname, '/favicon.ico'))
+})
+
+app.get("/presets", (req, res) => {
+  res.send(readFileSync("presets.json"))
+})
+
+app.post("/savePreset", (req, res) => {
+  let presets = JSON.parse(readFileSync("presets.json"))
+  presets.push(req.body)
+  writeFileSync("presets.json", JSON.stringify(presets))
+  res.sendStatus(200)
 })
 
 app.post("/update", (req, res) => {

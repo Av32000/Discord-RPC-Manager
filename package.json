@@ -1,6 +1,24 @@
 {
   "dependencies": {
     "discord-rpc": "^4.0.1",
+    "dotenv": "^16.3.1",
     "express": "^4.18.1"
-  }
+  },
+  "name": "custom-rpc-manager",
+  "description": "A web server to easily customize your RPC Discord",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Av32000/Discord-RPC-Manager.git"
+  },
+  "author": "Av32000",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Av32000/Discord-RPC-Manager/issues"
+  },
+  "homepage": "https://github.com/Av32000/Discord-RPC-Manager#readme"
 }

@@ -14,6 +14,11 @@
 		<p>ClientID : <span id="client-id">Loading...</span> / Change Settigns in the <a id="settings-URL"
 				href="#">Loading...</a></p>
 	</div>
+	<div class="presets">
+		<select id="presets" onchange="SetPreset(this)">
+			<option value="custom">Custom</option>
+		</select>
+	</div>
 	<div class="inputs">
 		<p>Line 1 :</p>
 		<input type="text" id="l1" placeholder="Ligne 1" />
@@ -33,6 +38,7 @@
 </body>
 
 <script>
+	let presets;
 	function GetID() {
 		fetch('/id').then(res => {
 			res.text().then(data => {
@@ -41,6 +47,21 @@
 				let a = document.getElementById("settings-URL")
 				a.innerHTML = "Developer Portal"
 				a.href = "https://discord.com/developers/applications/" + data
+			})
+		});
+	}
+
+	function GetPresets() {
+		const select = document.getElementById("presets")
+		fetch('/presets').then(res => {
+			res.json().then(data => {
+				presets = data;
+				data.forEach(preset => {
+					const opt = document.createElement("option");
+					opt.value = preset.name.toLowerCase()
+					opt.text = preset.name
+					select.add(opt)
+				});
 			})
 		});
 	}
@@ -70,6 +91,42 @@
 		});
 	}
 
+	function SavePreset(title) {
+		let l1 = document.getElementById('l1').value;
+		let l2 = document.getElementById('l2').value;
+		let imgid = document.getElementById('imgid').value;
+		let imgtxt = document.getElementById('imgtxt').value;
+		let imgsid = document.getElementById('imgsid').value;
+		let imgstxt = document.getElementById('imgstxt').value;
+
+		const obj = {
+			name: title,
+			l1: l1,
+			l2: l2,
+			imgid: imgid,
+			imgtxt: imgtxt,
+			imgsid: imgsid,
+			imgstxt: imgstxt,
+		}
+
+		//Send Data
+		fetch('/savePreset', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(obj),
+		});
+
+		presets.push(obj)
+		const select = document.getElementById("presets")
+		const opt = document.createElement("option");
+		opt.value = obj.name.toLowerCase()
+		opt.text = obj.name
+		select.add(opt)
+		select.value = opt.value
+	}
+
 	function clearData() {
 		fetch('/clear', {
 			method: 'POST',
@@ -79,7 +136,39 @@
 		});
 	}
 
+	function SetPreset(element) {
+		let l1 = document.getElementById('l1');
+		let l2 = document.getElementById('l2');
+		let imgid = document.getElementById('imgid');
+		let imgtxt = document.getElementById('imgtxt');
+		let imgsid = document.getElementById('imgsid');
+		let imgstxt = document.getElementById('imgstxt');
+		if (element.value !== "custom") {
+			presets.forEach(preset => {
+				if (preset.name.toLowerCase() === element.value) {
+					l1.value = preset.l1 || ""
+					l2.value = preset.l2 || ""
+					imgid.value = preset.imgid || ""
+					imgtxt.value = preset.imgtxt || ""
+					imgsid.value = preset.imgsid || ""
+					imgstxt.value = preset.imgstxt || ""
+				}
+			})
+		}
+	}
+
+	document.addEventListener('keydown', e => {
+		if (e.ctrlKey && e.key === 's') {
+			e.preventDefault();
+			const title = window.prompt("Please choose a preset name")
+			if (title != null && title != "") {
+				SavePreset(title)
+			}
+		}
+	});
+
 	GetID()
+	GetPresets()
 </script>
 
 </html>
